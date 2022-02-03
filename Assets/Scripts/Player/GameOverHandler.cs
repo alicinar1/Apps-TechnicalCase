@@ -9,10 +9,10 @@ public class GameOverHandler : MonoBehaviour
     {
         Debug.Log(other.name);
         Debug.Log(other.tag);
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Player"))
         {
-            //Debug.Log(other.name);
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
+            Debug.Log(SceneManager.GetActiveScene().name);
         }
     }
 }
