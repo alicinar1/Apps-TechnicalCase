@@ -22,7 +22,7 @@ public class PlayerLaunchController : MonoBehaviour
     {
         playerRB.useGravity = true;
         Debug.Log("PlayerLaunch!");
-        playerRB.GetComponent<Rigidbody>().AddForce(0, lauchPower, lauchPower, ForceMode.Impulse);
+        playerRB.GetComponent<Rigidbody>().AddForce(0, lauchPower / 3, lauchPower, ForceMode.Impulse);
     }
     private void SetPlayerDrag(float drag)
     {

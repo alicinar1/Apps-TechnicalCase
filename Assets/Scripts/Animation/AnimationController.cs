@@ -12,6 +12,7 @@ public class AnimationController : MonoBehaviour
     {
         DragInputData.OnPlayerDrag += BendStick;
         DragInputData.OnPlayerLaunch += ReleaseStick;
+        DragInputData.OnPlayerLaunch += PlayerLaunchRolling;
 
         TapHoldInputData.OnHoldStart += PlayerSpreadWings;
         TapHoldInputData.OnHoldEnd += PlayerCloseWings;
@@ -21,6 +22,7 @@ public class AnimationController : MonoBehaviour
     {
         DragInputData.OnPlayerDrag -= BendStick;
         DragInputData.OnPlayerLaunch -= ReleaseStick;
+        DragInputData.OnPlayerLaunch -= PlayerLaunchRolling;
 
         TapHoldInputData.OnHoldStart -= PlayerSpreadWings;
         TapHoldInputData.OnHoldEnd -= PlayerCloseWings;
@@ -35,6 +37,11 @@ public class AnimationController : MonoBehaviour
     {
         stickAnimator.SetBool("IsBending", false);
         stickAnimator.SetBool("IsReleasing", true);
+    }
+
+    private void PlayerLaunchRolling(float bendValue)
+    {
+        playerAnimator.SetBool("IsLaunched", true);
     }
 
     private void PlayerSpreadWings()
