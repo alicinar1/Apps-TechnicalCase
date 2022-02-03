@@ -8,28 +8,29 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        inputDataList.Clear();
         DragInputData.OnInputDataStart += AddInputData;
+        SteeringInputData.OnInputDataStart += AddInputData;
         TapHoldInputData.OnInputDataStart += AddInputData;
 
         DragInputData.OnInputDataEnd += RemoveInputData;
         TapHoldInputData.OnInputDataEnd += RemoveInputData;
+        SteeringInputData.OnInputDataEnd += RemoveInputData;
     }
 
     private void OnDisable()
     {
         DragInputData.OnInputDataStart -= AddInputData;
         TapHoldInputData.OnInputDataStart -= AddInputData;
+        SteeringInputData.OnInputDataStart -= AddInputData;
 
         DragInputData.OnInputDataEnd -= RemoveInputData;
         TapHoldInputData.OnInputDataEnd -= RemoveInputData;
+        SteeringInputData.OnInputDataEnd -= RemoveInputData;
     }
 
     private void Update()
     {
-        //foreach (AbstractInputData inputData in inputDataList.to)
-        //{
-        //    inputData.ProcessInput();
-        //}
         for (int i = 0; i < inputDataList.Count; i++)
         {
             inputDataList[i].ProcessInput();
@@ -40,10 +41,12 @@ public class InputManager : MonoBehaviour
     {
         inputDataList.Add(inputData);
         Debug.Log(inputData + "Added");
+        Debug.Log(inputDataList.Count);
     }
 
     public void RemoveInputData(AbstractInputData inputData)
     {
         inputDataList.Remove(inputData);
+        Debug.Log(inputData + "Removed");
     }
 }

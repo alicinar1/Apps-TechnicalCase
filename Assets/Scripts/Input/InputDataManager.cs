@@ -6,6 +6,7 @@ public class InputDataManager : MonoBehaviour
 {
     [SerializeField] private AbstractInputData launchPhaseData;
     [SerializeField] private AbstractInputData flyPhaseData;
+    [SerializeField] private AbstractInputData steeringData;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class InputDataManager : MonoBehaviour
     private void ActivateFlyPhase()
     {
         launchPhaseData.RemoveInputDataToManager();
+        steeringData.AddInputDataToManager();
         flyPhaseData.AddInputDataToManager();
     }
 }

@@ -20,7 +20,7 @@ public class JumpPointSpawner : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        Vector3 position = new Vector3(Random.Range(-120, 120), 0, Random.Range(-220, 220));
+        Vector3 position = new Vector3(Random.Range(-120, 120), 1, Random.Range(-220, 220));
         return position;
     }
 }

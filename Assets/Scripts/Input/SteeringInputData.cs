@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "TechnicalCase/Input/DragInputData")]
-public class DragInputData : AbstractInputData
+[CreateAssetMenu(menuName = "TechnicalCase/Input/SteeringInputData")]
+public class SteeringInputData : AbstractInputData
 {
     private float _firstTouchPosition;
     private float _currentTouchPosition;
-    public float DragValue;
-    public bool isPressed = true;
+    [SerializeField]public float _steeringValue;
 
     public static event Action<AbstractInputData> OnInputDataStart;
     public static event Action<AbstractInputData> OnInputDataEnd;
-    public static event Action<float> OnPlayerLaunch;
-    public static event Action<float> OnPlayerDrag;
-    public static event Action OnLaunch;
+    public static event Action<float> OnHoldStart;
+    public static event Action OnHoldEnd;
+
     public override void ProcessInput()
     {
         if (Input.touchCount == 0)
@@ -26,21 +25,16 @@ public class DragInputData : AbstractInputData
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Began)
         {
             _firstTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
-            isPressed = true;
         }
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Moved)
         {
             _currentTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
-            DragValue = Mathf.Abs(_currentTouchPosition - _firstTouchPosition) / 10;
-            DragValue = Mathf.Clamp(DragValue, 0, 100);
-            Debug.Log(DragValue);
+            _steeringValue = (_currentTouchPosition - _firstTouchPosition) / 10;
+            OnHoldStart?.Invoke(_steeringValue);
         }
-        OnPlayerDrag?.Invoke(DragValue);
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Ended)
         {
-            isPressed = false;
-            OnPlayerLaunch?.Invoke(DragValue);
-            OnLaunch?.Invoke();
+            _steeringValue = 0;
         }
     }
 
