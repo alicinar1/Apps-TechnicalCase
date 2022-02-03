@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFlyController : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRB;
-    [SerializeField] private Transform torquePoint;
+    [SerializeField] private Animator playerAnimator;
     [SerializeField] private float flyDrag;
     [SerializeField] private float rollDrag;
     [SerializeField] private float flyAngularDrag;
@@ -35,12 +35,18 @@ public class PlayerFlyController : MonoBehaviour
 
     private void Steering(float steeringValue)
     {
-        playerRB.AddForceAtPosition(new Vector3(steeringValue / 1000 , - steeringValue / 1000 , 0), torquePoint.position, ForceMode.Impulse);
+        //playerRB.AddForceAtPosition(new Vector3(steeringValue / 1000 , - steeringValue / 1000 , 0), torquePoint.position, ForceMode.Impulse);
+        playerAnimator.SetFloat("Rotation", steeringValue / 10);
         Debug.Log(steeringValue);
     }
 
     private void Flying()
     {
+        if (_isFlying)
+        {
+            return;
+        }
+
         SetPhysicsToFly();
         _isFlying = true;
     }
@@ -57,7 +63,7 @@ public class PlayerFlyController : MonoBehaviour
 
     private void SetPhysicsToFly()
     {
-        Physics.gravity = new Vector3(0, -3, 0);
+        Physics.gravity = new Vector3(0, -5, 0);
         playerRB.drag = flyDrag;
         playerRB.angularDrag = flyAngularDrag;
     }

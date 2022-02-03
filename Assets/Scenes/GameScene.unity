@@ -456,7 +456,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.05295, y: 1}
+    m_SensorSize: {x: 0.46220303, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1079,6 +1079,10 @@ PrefabInstance:
       propertyPath: stickTopPosition
       value: 
       objectReference: {fileID: 842415351}
+    - target: {fileID: 3853788566262734155, guid: 77d1ed8221966aa45bf3009e2d846680, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 3166231813990863772}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d1ed8221966aa45bf3009e2d846680, type: 3}
 --- !u!1001 &6764021627686247074

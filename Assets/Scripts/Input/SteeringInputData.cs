@@ -35,6 +35,7 @@ public class SteeringInputData : AbstractInputData
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Ended)
         {
             _steeringValue = 0;
+            OnHoldStart?.Invoke(_steeringValue);
         }
     }
 
