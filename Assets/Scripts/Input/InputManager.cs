@@ -2,31 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoSingleton<InputManager>
 {
     [SerializeField] private List<AbstractInputData> inputDataList = new List<AbstractInputData>();
 
-    private void Awake()
+    private void Start()
     {
-        inputDataList.Clear();
-        DragInputData.OnInputDataStart += AddInputData;
-        SteeringInputData.OnInputDataStart += AddInputData;
-        TapHoldInputData.OnInputDataStart += AddInputData;
-
-        DragInputData.OnInputDataEnd += RemoveInputData;
-        TapHoldInputData.OnInputDataEnd += RemoveInputData;
-        SteeringInputData.OnInputDataEnd += RemoveInputData;
+        //inputDataList.Clear();
     }
 
     private void OnDisable()
     {
-        DragInputData.OnInputDataStart -= AddInputData;
-        TapHoldInputData.OnInputDataStart -= AddInputData;
-        SteeringInputData.OnInputDataStart -= AddInputData;
 
-        DragInputData.OnInputDataEnd -= RemoveInputData;
-        TapHoldInputData.OnInputDataEnd -= RemoveInputData;
-        SteeringInputData.OnInputDataEnd -= RemoveInputData;
     }
 
     private void Update()

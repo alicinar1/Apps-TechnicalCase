@@ -12,8 +12,8 @@ public class DragInputData : AbstractInputData
     public float DragValue;
     public bool isPressed = true;
 
-    public static event Action<AbstractInputData> OnInputDataStart;
-    public static event Action<AbstractInputData> OnInputDataEnd;
+    //public static event Action<AbstractInputData> OnInputDataStart;
+    //public static event Action<AbstractInputData> OnInputDataEnd;
     public static event Action<float> OnPlayerLaunch;
     public static event Action<float> OnPlayerDrag;
     public static event Action OnLaunch;
@@ -46,11 +46,13 @@ public class DragInputData : AbstractInputData
 
     public override void AddInputDataToManager()
     {
-        OnInputDataStart?.Invoke(this);
+        //OnInputDataStart?.Invoke(this);
+        InputManager.Instance.AddInputData(this);
     }
 
     public override void RemoveInputDataToManager()
     {
-        OnInputDataEnd?.Invoke(this);
+        //OnInputDataEnd?.Invoke(this);
+        InputManager.Instance.RemoveInputData(this);
     }
 }

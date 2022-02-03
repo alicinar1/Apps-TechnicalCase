@@ -10,6 +10,11 @@ public class AnimationController : MonoBehaviour
 
     private void Start()
     {
+
+    }
+
+    private void OnEnable()
+    {
         DragInputData.OnPlayerDrag += BendStick;
         DragInputData.OnPlayerLaunch += ReleaseStick;
         DragInputData.OnPlayerLaunch += PlayerLaunchRolling;

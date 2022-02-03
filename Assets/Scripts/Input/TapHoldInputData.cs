@@ -8,8 +8,8 @@ public class TapHoldInputData : AbstractInputData
 {
     public bool isHold;
 
-    public static event Action<AbstractInputData> OnInputDataStart;
-    public static event Action<AbstractInputData> OnInputDataEnd;
+    //public static event Action<AbstractInputData> OnInputDataStart;
+    //public static event Action<AbstractInputData> OnInputDataEnd;
     public static event Action OnHoldStart;
     public static event Action OnHoldEnd;
 
@@ -35,11 +35,13 @@ public class TapHoldInputData : AbstractInputData
 
     public override void AddInputDataToManager()
     {
-        OnInputDataStart?.Invoke(this);
+        //OnInputDataStart?.Invoke(this);
+        InputManager.Instance.AddInputData(this);
     }
 
     public override void RemoveInputDataToManager()
     {
-        OnInputDataEnd?.Invoke(this);
+        //OnInputDataEnd?.Invoke(this);
+        InputManager.Instance.RemoveInputData(this);
     }
 }

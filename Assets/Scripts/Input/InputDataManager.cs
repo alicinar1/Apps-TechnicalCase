@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputDataManager : MonoBehaviour
+public class InputDataManager : MonoSingleton<InputDataManager>
 {
     [SerializeField] private AbstractInputData launchPhaseData;
     [SerializeField] private AbstractInputData flyPhaseData;
@@ -10,8 +10,18 @@ public class InputDataManager : MonoBehaviour
 
     private void Start()
     {
-        launchPhaseData.AddInputDataToManager();
+        
+    }
+
+    private void OnEnable()
+    {
+        ActieveDragPhase();
         DragInputData.OnLaunch += ActivateFlyPhase;
+    }
+
+    private void OnDisable()
+    {
+        DragInputData.OnLaunch -= ActivateFlyPhase;
     }
 
     private void ActivateFlyPhase()
@@ -19,5 +29,12 @@ public class InputDataManager : MonoBehaviour
         launchPhaseData.RemoveInputDataToManager();
         steeringData.AddInputDataToManager();
         flyPhaseData.AddInputDataToManager();
+    }
+
+    private void ActieveDragPhase()
+    {
+        launchPhaseData.AddInputDataToManager();
+        steeringData.RemoveInputDataToManager();
+        flyPhaseData.RemoveInputDataToManager();
     }
 }

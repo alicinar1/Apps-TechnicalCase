@@ -9,9 +9,15 @@ public class PlayerLaunchController : MonoBehaviour
     [SerializeField] private Transform stickTopPosition;
     private void Start()
     {
+
+    }
+
+    private void OnEnable()
+    {
         DragInputData.OnPlayerLaunch += LaunchPlayer;
         DragInputData.OnPlayerDrag += SetPlayerDrag;
     }
+
     private void OnDisable()
     {
         DragInputData.OnPlayerLaunch -= LaunchPlayer;

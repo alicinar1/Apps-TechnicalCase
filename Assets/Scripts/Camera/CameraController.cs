@@ -2,15 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoSingleton<CameraController>
 {
     [SerializeField] private Animator cameraAnimator;
 
     private void Start()
     {
         SetDragCamera();
-        DragInputData.OnLaunch += SetFlyCamera;
+
     }
+
+    private void OnEnable()
+    {
+        DragInputData.OnLaunch += SetFlyCamera;
+        GameOverHandler.OnGameOver += SetDragCamera;
+    }
+
+    private void OnDisable()
+    {
+        DragInputData.OnLaunch -= SetFlyCamera;
+        GameOverHandler.OnGameOver -= SetDragCamera;
+    }
+
     private void SetFlyCamera()
     {
         cameraAnimator.Play("FlyCamera");
