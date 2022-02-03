@@ -13,8 +13,11 @@ public class DragInputData : AbstractInputData
     public bool isPressed = true;
     private bool isReleased;
 
+    public static event Action<AbstractInputData> OnInputDataStart;
+    public static event Action<AbstractInputData> OnInputDataEnd;
     public static event Action<float> OnPlayerLaunch;
     public static event Action<float> OnPlayerDrag;
+    public static event Action OnLaunch;
     public override void ProcessInput()
     {
         if (Input.touchCount == 0)
@@ -26,12 +29,28 @@ public class DragInputData : AbstractInputData
             _firstTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
             isPressed = true;
         }
-        _currentTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
-        DragValue = Mathf.Abs(_currentTouchPosition - _firstTouchPosition) / 10;
+        if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Moved)
+        {
+            _currentTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
+            DragValue = Mathf.Abs(_currentTouchPosition - _firstTouchPosition) / 10;
+        }
+        OnPlayerDrag?.Invoke(DragValue);
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Ended)
         {
             isPressed = false;
             OnPlayerLaunch?.Invoke(DragValue);
+            OnLaunch?.Invoke();
+            RemoveInputDataToManager();
         }
+    }
+
+    public override void AddInputDataToManager()
+    {
+        OnInputDataStart?.Invoke(this);
+    }
+
+    public override void RemoveInputDataToManager()
+    {
+        OnInputDataEnd?.Invoke(this);
     }
 }

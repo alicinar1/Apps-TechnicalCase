@@ -4,13 +4,46 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private AbstractInputData[] inputDatas;
+    [SerializeField] private List<AbstractInputData> inputDataList = new List<AbstractInputData>();
+
+    private void Awake()
+    {
+        DragInputData.OnInputDataStart += AddInputData;
+        TapHoldInputData.OnInputDataStart += AddInputData;
+
+        DragInputData.OnInputDataEnd += RemoveInputData;
+        TapHoldInputData.OnInputDataEnd += RemoveInputData;
+    }
+
+    private void OnDisable()
+    {
+        DragInputData.OnInputDataStart -= AddInputData;
+        TapHoldInputData.OnInputDataStart -= AddInputData;
+
+        DragInputData.OnInputDataEnd -= RemoveInputData;
+        TapHoldInputData.OnInputDataEnd -= RemoveInputData;
+    }
 
     private void Update()
     {
-        for (int i = 0; i < inputDatas.Length; i++)
+        //foreach (AbstractInputData inputData in inputDataList.to)
+        //{
+        //    inputData.ProcessInput();
+        //}
+        for (int i = 0; i < inputDataList.Count; i++)
         {
-            inputDatas[i].ProcessInput();
+            inputDataList[i].ProcessInput();
         }
+    }
+
+    public void AddInputData(AbstractInputData inputData)
+    {
+        inputDataList.Add(inputData);
+        Debug.Log(inputData + "Added");
+    }
+
+    public void RemoveInputData(AbstractInputData inputData)
+    {
+        inputDataList.Remove(inputData);
     }
 }
