@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] private Animator stickAnimator;
-    [SerializeField] private Animator playerAnimator;
-    [SerializeField] private AbstractInputData tapHoldInputData;
-
-
-    private void Start()
-    {
-
-    }
+    [SerializeField] private Animator _stickAnimator;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private AbstractInputData _tapHoldInputData;
 
     private void OnEnable()
     {
@@ -36,29 +30,29 @@ public class AnimationController : MonoBehaviour
 
     private void BendStick(float bendValue)
     {
-        stickAnimator.SetBool("IsBending", true);
+        _stickAnimator.SetBool("IsBending", true);
     }
 
     private void ReleaseStick(float bendValue)
     {
-        stickAnimator.SetBool("IsBending", false);
-        stickAnimator.SetBool("IsReleasing", true);
+        _stickAnimator.SetBool("IsBending", false);
+        _stickAnimator.SetBool("IsReleasing", true);
     }
 
     private void PlayerLaunchRolling(float bendValue)
     {
-        playerAnimator.SetBool("IsLaunched", true);
+        _playerAnimator.SetBool("IsLaunched", true);
     }
 
     private void PlayerSpreadWings()
     {
-        playerAnimator.SetBool("IsWingsOpen", true);
-        playerAnimator.SetBool("IsWingClose", false);
+        _playerAnimator.SetBool("IsWingsOpen", true);
+        _playerAnimator.SetBool("IsWingClose", false);
     }
 
     private void PlayerCloseWings()
     {
-        playerAnimator.SetBool("IsWingsOpen", false);
-        playerAnimator.SetBool("IsWingClose", true);
+        _playerAnimator.SetBool("IsWingsOpen", false);
+        _playerAnimator.SetBool("IsWingClose", true);
     }
 }

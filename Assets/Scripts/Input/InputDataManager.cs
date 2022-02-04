@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class InputDataManager : MonoSingleton<InputDataManager>
 {
-    [SerializeField] private AbstractInputData launchPhaseData;
-    [SerializeField] private AbstractInputData flyPhaseData;
-    [SerializeField] private AbstractInputData steeringData;
-
-    private void Start()
-    {
-        
-    }
+    [SerializeField] private AbstractInputData _launchPhaseData;
+    [SerializeField] private AbstractInputData _flyPhaseData;
+    [SerializeField] private AbstractInputData _steeringData;
 
     private void OnEnable()
     {
@@ -26,15 +21,15 @@ public class InputDataManager : MonoSingleton<InputDataManager>
 
     private void ActivateFlyPhase()
     {
-        launchPhaseData.RemoveInputDataToManager();
-        steeringData.AddInputDataToManager();
-        flyPhaseData.AddInputDataToManager();
+        _launchPhaseData.RemoveInputDataToManager();
+        _steeringData.AddInputDataToManager();
+        _flyPhaseData.AddInputDataToManager();
     }
 
     private void ActieveDragPhase()
     {
-        launchPhaseData.AddInputDataToManager();
-        steeringData.RemoveInputDataToManager();
-        flyPhaseData.RemoveInputDataToManager();
+        _launchPhaseData.AddInputDataToManager();
+        _steeringData.RemoveInputDataToManager();
+        _flyPhaseData.RemoveInputDataToManager();
     }
 }

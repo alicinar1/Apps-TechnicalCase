@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class JumpPointSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] jumpPointPrefabs;
-    [SerializeField] private Transform parentObject;
-    [SerializeField] private int jumpPointCount;
-    private List<Transform> jumpPoints; 
+    [SerializeField] private GameObject[] _jumpPointPrefabs;
+    [SerializeField] private Transform _parentObject;
+    [SerializeField] private int _jumpPointCount;
+    private List<Transform> _jumpPoints; 
 
     private void Start()
     {
-        for (int i = 0; i < jumpPointCount; i++)
+        for (int i = 0; i < _jumpPointCount; i++)
         {
-            var jumpPoint = Instantiate(jumpPointPrefabs[Random.Range(0, jumpPointPrefabs.Length)], Vector3.zero, Quaternion.identity, parentObject);
+            var jumpPoint = Instantiate(_jumpPointPrefabs[Random.Range(0, _jumpPointPrefabs.Length)], Vector3.zero, Quaternion.identity, _parentObject);
             jumpPoint.transform.localPosition = GetRandomPosition();
         }
     }

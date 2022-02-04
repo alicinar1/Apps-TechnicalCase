@@ -7,12 +7,11 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "TechnicalCase/Input/SteeringInputData")]
 public class SteeringInputData : AbstractInputData
 {
+    [SerializeField] public float _steeringValue;
+
     private float _firstTouchPosition;
     private float _currentTouchPosition;
-    [SerializeField]public float _steeringValue;
 
-    //public static event Action<AbstractInputData> OnInputDataStart;
-    //public static event Action<AbstractInputData> OnInputDataEnd;
     public static event Action<float> OnHoldStart;
     public static event Action OnHoldEnd;
 
@@ -43,13 +42,11 @@ public class SteeringInputData : AbstractInputData
 
     public override void AddInputDataToManager()
     {
-        //OnInputDataStart?.Invoke(this);
         InputManager.Instance.AddInputData(this);
     }
 
     public override void RemoveInputDataToManager()
     {
-        //OnInputDataEnd?.Invoke(this);
         InputManager.Instance.RemoveInputData(this);
     }
 }

@@ -9,11 +9,9 @@ public class DragInputData : AbstractInputData
 {
     private float _firstTouchPosition;
     private float _currentTouchPosition;
-    public float DragValue;
+    public float dragValue;
     public bool isPressed = true;
 
-    //public static event Action<AbstractInputData> OnInputDataStart;
-    //public static event Action<AbstractInputData> OnInputDataEnd;
     public static event Action<float> OnPlayerLaunch;
     public static event Action<float> OnPlayerDrag;
     public static event Action OnLaunch;
@@ -31,28 +29,26 @@ public class DragInputData : AbstractInputData
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Moved)
         {
             _currentTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
-            DragValue = Mathf.Abs(_currentTouchPosition - _firstTouchPosition) / 10;
-            DragValue = Mathf.Clamp(DragValue, 0, 100);
-            Debug.Log(DragValue);
+            dragValue = Mathf.Abs(_currentTouchPosition - _firstTouchPosition) / 10;
+            dragValue = Mathf.Clamp(dragValue, 0, 100);
+            Debug.Log(dragValue);
         }
-        OnPlayerDrag?.Invoke(DragValue);
+        OnPlayerDrag?.Invoke(dragValue);
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Ended)
         {
             isPressed = false;
-            OnPlayerLaunch?.Invoke(DragValue);
+            OnPlayerLaunch?.Invoke(dragValue);
             OnLaunch?.Invoke();
         }
     }
 
     public override void AddInputDataToManager()
     {
-        //OnInputDataStart?.Invoke(this);
         InputManager.Instance.AddInputData(this);
     }
 
     public override void RemoveInputDataToManager()
     {
-        //OnInputDataEnd?.Invoke(this);
         InputManager.Instance.RemoveInputData(this);
     }
 }

@@ -5,12 +5,8 @@ using System;
 
 public class PlayerLaunchController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody playerRB;
-    [SerializeField] private Transform stickTopPosition;
-    private void Start()
-    {
-
-    }
+    [SerializeField] private Rigidbody _playerRB;
+    [SerializeField] private Transform _stickTopPosition;
 
     private void OnEnable()
     {
@@ -26,13 +22,13 @@ public class PlayerLaunchController : MonoBehaviour
 
     private void LaunchPlayer(float lauchPower)
     {
-        playerRB.useGravity = true;
+        _playerRB.useGravity = true;
         Debug.Log("PlayerLaunch!");
-        playerRB.GetComponent<Rigidbody>().AddForce(0, lauchPower / 3, lauchPower, ForceMode.Impulse);
+        _playerRB.GetComponent<Rigidbody>().AddForce(0, lauchPower / 3, lauchPower, ForceMode.Impulse);
     }
     private void SetPlayerDrag(float drag)
     {
-        playerRB.position = stickTopPosition.position;
-        playerRB.rotation = stickTopPosition.rotation;
+        _playerRB.position = _stickTopPosition.position;
+        _playerRB.rotation = _stickTopPosition.rotation;
     }
 }

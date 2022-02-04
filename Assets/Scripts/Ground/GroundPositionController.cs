@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GroundPositionController : MonoBehaviour
 {
-    [SerializeField] private Transform parent;
+    [SerializeField] private Transform _parent;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            parent.position = new Vector3(0, transform.position.y, transform.position.z + 900);
+            _parent.position = new Vector3(0, transform.position.y, transform.position.z + 900);
         }
     }
 }

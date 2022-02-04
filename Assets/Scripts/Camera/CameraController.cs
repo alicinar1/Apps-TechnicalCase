@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoSingleton<CameraController>
 {
-    [SerializeField] private Animator cameraAnimator;
+    [SerializeField] private Animator _cameraAnimator;
 
     private void Start()
     {
         SetDragCamera();
-
     }
 
     private void OnEnable()
@@ -26,11 +25,11 @@ public class CameraController : MonoSingleton<CameraController>
 
     private void SetFlyCamera()
     {
-        cameraAnimator.Play("FlyCamera");
+        _cameraAnimator.Play("FlyCamera");
     }
 
     private void SetDragCamera()
     {
-        cameraAnimator.Play("DragCamera");
+        _cameraAnimator.Play("DragCamera");
     }
 }

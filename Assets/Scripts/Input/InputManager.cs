@@ -4,36 +4,26 @@ using UnityEngine;
 
 public class InputManager : MonoSingleton<InputManager>
 {
-    [SerializeField] private List<AbstractInputData> inputDataList = new List<AbstractInputData>();
-
-    private void Start()
-    {
-        //inputDataList.Clear();
-    }
-
-    private void OnDisable()
-    {
-
-    }
+    [SerializeField] private List<AbstractInputData> _inputDataList = new List<AbstractInputData>();
 
     private void Update()
     {
-        for (int i = 0; i < inputDataList.Count; i++)
+        for (int i = 0; i < _inputDataList.Count; i++)
         {
-            inputDataList[i].ProcessInput();
+            _inputDataList[i].ProcessInput();
         }
     }
 
     public void AddInputData(AbstractInputData inputData)
     {
-        inputDataList.Add(inputData);
+        _inputDataList.Add(inputData);
         Debug.Log(inputData + "Added");
-        Debug.Log(inputDataList.Count);
+        Debug.Log(_inputDataList.Count);
     }
 
     public void RemoveInputData(AbstractInputData inputData)
     {
-        inputDataList.Remove(inputData);
+        _inputDataList.Remove(inputData);
         Debug.Log(inputData + "Removed");
     }
 }

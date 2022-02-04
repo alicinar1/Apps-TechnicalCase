@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class PlayerFlyController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody playerRB;
-    [SerializeField] private Animator playerAnimator;
-    [SerializeField] private float flyDrag;
-    [SerializeField] private float rollDrag;
-    [SerializeField] private float flyAngularDrag;
-    [SerializeField] private float rollAngularDrag;
+    [SerializeField] private Rigidbody _playerRB;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private float _flyDrag;
+    [SerializeField] private float _rollDrag;
+    [SerializeField] private float _flyAngularDrag;
+    [SerializeField] private float _rollAngularDrag;
 
     private bool _isFlying = false;
-
-
-    private void Start()
-    {
-
-    }
 
     private void OnEnable()
     {
@@ -35,17 +29,15 @@ public class PlayerFlyController : MonoBehaviour
 
     private void Steering(float steeringValue)
     {
-        //playerRB.AddForceAtPosition(new Vector3(steeringValue / 1000 , - steeringValue / 1000 , 0), torquePoint.position, ForceMode.Impulse);
-        playerAnimator.SetFloat("Rotation", steeringValue);
-        playerRB.AddForceAtPosition(new Vector3(steeringValue, 0, 0), playerRB.transform.position + Vector3.forward);
-        Debug.Log(steeringValue);
+        _playerAnimator.SetFloat("Rotation", steeringValue);
+        _playerRB.AddForceAtPosition(new Vector3(steeringValue, 0, 0), _playerRB.transform.position + Vector3.forward);
     }
 
     private void Flying()
     {
         if (_isFlying)
         {
-            playerRB.AddForce(Vector3.forward * 10);
+            _playerRB.AddForce(Vector3.forward * 10);
             return;
         }
 
@@ -57,7 +49,7 @@ public class PlayerFlyController : MonoBehaviour
     {
         if (!_isFlying)
         {
-            playerRB.AddForce(Vector3.forward * 10);
+            _playerRB.AddForce(Vector3.forward * 10);
             return;
         }
         SetPhysicsToRoll();
@@ -67,14 +59,14 @@ public class PlayerFlyController : MonoBehaviour
     private void SetPhysicsToFly()
     {
         Physics.gravity = new Vector3(0, -3, 0);
-        playerRB.drag = flyDrag;
-        playerRB.angularDrag = flyAngularDrag;
+        _playerRB.drag = _flyDrag;
+        _playerRB.angularDrag = _flyAngularDrag;
     }
 
     private void SetPhysicsToRoll()
     {
         Physics.gravity = new Vector3(0, -5f, 0);
-        playerRB.drag = rollDrag;
-        playerRB.angularDrag = rollAngularDrag;
+        _playerRB.drag = _rollDrag;
+        _playerRB.angularDrag = _rollAngularDrag;
     }
 }
