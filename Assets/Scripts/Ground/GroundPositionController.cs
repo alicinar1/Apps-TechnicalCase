@@ -9,7 +9,7 @@ public class GroundPositionController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            parent.position = new Vector3(0, transform.position.y, transform.position.z + 1500);
+            parent.position = new Vector3(0, transform.position.y, transform.position.z + 900);
         }
     }
 }

@@ -30,11 +30,13 @@ public class SteeringInputData : AbstractInputData
         {
             _currentTouchPosition = Touchscreen.current.primaryTouch.position.ReadValue().x;
             _steeringValue = (_currentTouchPosition - _firstTouchPosition) / 10;
+            _steeringValue = Mathf.Clamp(_steeringValue, -5, 5);
             OnHoldStart?.Invoke(_steeringValue);
         }
         if (Input.GetTouch(0).phase == UnityEngine.TouchPhase.Ended)
         {
             _steeringValue = 0;
+            _steeringValue = Mathf.Clamp(_steeringValue, -5, 5);
             OnHoldStart?.Invoke(_steeringValue);
         }
     }

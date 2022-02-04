@@ -8,6 +8,7 @@ public class AnimationController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private AbstractInputData tapHoldInputData;
 
+
     private void Start()
     {
 

@@ -36,7 +36,8 @@ public class PlayerFlyController : MonoBehaviour
     private void Steering(float steeringValue)
     {
         //playerRB.AddForceAtPosition(new Vector3(steeringValue / 1000 , - steeringValue / 1000 , 0), torquePoint.position, ForceMode.Impulse);
-        playerAnimator.SetFloat("Rotation", steeringValue / 10);
+        playerAnimator.SetFloat("Rotation", steeringValue);
+        playerRB.AddForceAtPosition(new Vector3(steeringValue, 0, 0), playerRB.transform.position + Vector3.forward);
         Debug.Log(steeringValue);
     }
 
@@ -44,6 +45,7 @@ public class PlayerFlyController : MonoBehaviour
     {
         if (_isFlying)
         {
+            playerRB.AddForce(Vector3.forward * 10);
             return;
         }
 
@@ -55,6 +57,7 @@ public class PlayerFlyController : MonoBehaviour
     {
         if (!_isFlying)
         {
+            playerRB.AddForce(Vector3.forward * 10);
             return;
         }
         SetPhysicsToRoll();
@@ -63,14 +66,14 @@ public class PlayerFlyController : MonoBehaviour
 
     private void SetPhysicsToFly()
     {
-        Physics.gravity = new Vector3(0, -5, 0);
+        Physics.gravity = new Vector3(0, -3, 0);
         playerRB.drag = flyDrag;
         playerRB.angularDrag = flyAngularDrag;
     }
 
     private void SetPhysicsToRoll()
     {
-        Physics.gravity = new Vector3(0, -9.81f, 0);
+        Physics.gravity = new Vector3(0, -5f, 0);
         playerRB.drag = rollDrag;
         playerRB.angularDrag = rollAngularDrag;
     }
